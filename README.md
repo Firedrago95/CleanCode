@@ -3,5 +3,5 @@
 
 
 ## 목차
-[1장 깨끗한 코드](https://github.com/Firedrago95/CleanCode/blob/main/Chapter1%20-%20Intro.md)
-[2장 의미 있는 이름](https://github.com/Firedrago95/CleanCode/blob/main/Chapter2%20-%20%EC%9D%98%EB%AF%B8%EC%9E%88%EB%8A%94%20%EC%9D%B4%EB%A6%84.md)
+[1장 깨끗한 코드](https://github.com/Firedrago95/CleanCode/blob/main/Chapter1%20-%20Intro.md)<br>
+[2장 의미 있는 이름](https://github.com/Firedrago95/CleanCode/blob/main/Chapter2%20-%20%EC%9D%98%EB%AF%B8%EC%9E%88%EB%8A%94%20%EC%9D%B4%EB%A6%84.md)<br>
