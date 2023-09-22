@@ -4,7 +4,7 @@
 -   변수에 주석이 필요하다면 실패한 이름이다.
 -   변수의 의미를 함축하지 않는다.
 
-```
+```java
 int d; // 경과시간(단위:날짜) 
 
 int daysSinceCreation
@@ -12,7 +12,7 @@ int daysSinceCreation
 
 -   개념과 의미가 함축적인 코드를 리팩토링
 
-```
+```java
 public List<int[]> getThem() { //코드가 함축적이라 의미를 알기 힘든 코드
 	List<int[]> list1 = new ArrayList<int[]>();
     for (int[] x : theList) {
@@ -59,7 +59,7 @@ public List<int[]> getFlaggedCells() {
 
 -   프로그래밍은 사회적인 활동이다. (협업해야한다.) 발음하기 쉬운 이름이 필요하다
 
-```
+```java
 class DtaRcrd102 { // 발음하기 힘든 클래스명
 	private Date genymdhms; // 발음하기 힘든 전역변수명
     private Date modymdhms;
@@ -121,7 +121,7 @@ class Customer { // 의미가 명확하고 발음하기 쉬운 이름
 
 -   클래스 , 함수 안에서 변수는 맥락을 가질 수 있다. 맥락은 더 잘 이해할 수 있도록 해준다.
 
-```
+```java
 // 맥락을 알기힘든 전역변수 , 긴 함수
 private void printGuessStatistics(char candidate, int count) {
     String number;
@@ -149,7 +149,7 @@ private void printGuessStatistics(char candidate, int count) {
 
  클래스와 함수로 맥락을 부여하고, 함수를 작게 리팩토링  
 
-```
+```java
 public class GuessStatisticsMessage { // 클래스로 맥락 부여
 	String number;
     String verb;
