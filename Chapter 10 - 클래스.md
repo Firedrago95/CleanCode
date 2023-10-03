@@ -191,3 +191,56 @@ public class ColumnList {
 
 -   구체적인 구현클래스에 의존하는 클래스는 테스트가 힘들다. 
 -   인터페이스와 추상 클래스를 사용해 구현이 미치는 영향을 격리하면 테스트가 편리해진다.
+
+```java
+//외부 api를 직접 호출
+public Portfolio {
+    private TokyoStockexchange exchange;
+    public Portfolio(TokyoStockExchange exchange) {
+        this.exchange = exchange;
+    }
+    // ... (api를 직접 사용)
+}
+```
+
+이 코드는 테스트가 어렵다. api 값이 실시간으로 변화하고, 이를 직접적으로 의존하기 때문이다.
+
+```java
+public interface StockExchange {
+    Money currentPrice(String symbol);
+}
+```
+
+인터페이스로 분리하고, 이를 구현하는 TokyoStockExchange 클래스를 구현한다. 이에따라 Portfolio 클래스도 바꾼다.
+
+```java
+public Portfolio {
+    private sTrockExchange exchange;
+    public portfolio(StockExchange exchange) {
+        this.exchange = exchange;
+    }
+    // ...
+}
+```
+
+```java
+public class PortfolioTest {
+    private FixedExchangeStub exchange;
+    private Portfolio portfolio;
+    
+    @Before 
+    protected void setUp() throws Exception {
+        exchange = new FixedStockExchangeStub();
+        exchange.fix("MSFT",100);
+        portfolio = new Portfolio(exchange);
+    }
+    
+    @Test
+    public void GivenFiveMSFTTotalShouldBe500() throws Exception {
+        portfolio.add(5, "MSFT");
+        Assert.assertEquals(500, portfolio.vlue());
+    }
+}
+```
+
+FIxedExchange 라는 테스트를 위한 객체 생성이 가능해진다.
