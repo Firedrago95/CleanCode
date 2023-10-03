@@ -117,6 +117,76 @@ public class Stack {
 -   새 기능을 수정하거나 기존 기능을 변경할때 건드릴 코드가 최소인 시스템 구조가 바람직하다.   
     이상적인 시스템이라면 새 기능을 추가할 때 시스템을 확장할 뿐 기존코드를 변경하지 않는다.
 
+```java
+public class Sql {
+    public Sql(String table, Column[] columns)
+    public String create()
+    public String insert(Object[] fields)
+    public String selectAll()
+    public String findByKey(String keyColumn, String keyValue)
+    public String select(Column column, String pattern)
+    public String select(Criteria criteria)
+    public String preparedInsert()
+    private String columnList(Column[] columns)
+    private String valuesList(Object[] fields, final Column[] columns) private String selectWithCriteria(String criteria)
+    private String placeholderList(Column[] columns)
+}
+```
+
+위 코드는 변경사항이 있는 경우, 클래스에 손을 대야한다. 이를 개선하면
+
+```java
+abstract public class Sql {
+    public Sql(String table, Column[] columns) 
+    abstract public String generate();
+}
+public class CreateSql extends Sql {
+    public CreateSql(String table, Column[] columns) 
+    @Override public String generate()
+}
+	
+public class SelectSql extends Sql {
+    public SelectSql(String table, Column[] columns) 
+    @Override public String generate()
+}
+
+public class InsertSql extends Sql {
+    public InsertSql(String table, Column[] columns, Object[] fields) 
+    @Override public String generate()
+    private String valuesList(Object[] fields, final Column[] columns)
+}
+
+public class SelectWithCriteriaSql extends Sql { 
+    public SelectWithCriteriaSql(
+    String table, Column[] columns, Criteria criteria) 
+    @Override public String generate()
+}
+
+public class SelectWithMatchSql extends Sql { 
+    public SelectWithMatchSql(String table, Column[] columns, Column column, String pattern) 
+    @Override public String generate()
+}
+
+public class FindByKeySql extends Sql public FindByKeySql(
+    String table, Column[] columns, String keyColumn, String keyValue) 
+    @Override public String generate()
+}
+
+public class PreparedInsertSql extends Sql {
+    public PreparedInsertSql(String table, Column[] columns) 
+    @Override public String generate() {
+    private String placeholderList(Column[] columns)
+}
+
+public class Where {
+    public Where(String criteria) public String generate()
+}
+
+public class ColumnList {
+    public ColumnList(Column[] columns) public String generate()
+}
+```
+
 #### \- 변경으로부터 격리
 
 -   구체적인 구현클래스에 의존하는 클래스는 테스트가 힘들다. 
